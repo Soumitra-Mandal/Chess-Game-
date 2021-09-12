@@ -32,7 +32,7 @@ colors = {
     }
 
 # Chessboard themes
-themes={
+themes = {
         "classic" : [colors['black'], colors['white']],
         "retro"   : [colors['brown'], colors['yellow']],
         "funky"   : [colors['purple'],colors['cyan']]        
@@ -51,7 +51,51 @@ class ChessBoard:
         ''' Draw Function: Draws the Chess Board '''
         for row_count in range(0,8):
             for col_count in range(0,8):
-                r = Rect(self.left*row_count,self.top*col_count,self.width,self.height)
+                r = Rect(self.left*row_count+20,self.top*col_count+20,self.width,self.height)
                 colour = themes[self.theme][(row_count+col_count)%2]
                 pygame.draw.rect(screen,colour,r) 
+
+
+
+class Text:
+    def __init__(self, data , fontName, fontSize, color):
+        self.data = data
+        self.fontName = fontName
+        self.fontSize = fontSize
+        self.color = colors[color]
+        
+    def draw(self,x,y,screen):
+        smallfont = pygame.font.SysFont(self.fontName,self.fontSize)
+        text = smallfont.render(self.data , True , self.color)
+        screen.blit(text,(x,y))
+
     
+class Button:
+    def __init__(self,color,width,height,l,t):
+        self.color = colors[color]
+        self.width = width
+        self.height = height
+        self.pos = (l,t)
+    def draw(self,x,y,text,screen):
+        pygame.draw.rect(screen, self.color, Rect(x,y,self.width,self.height),0,3)
+        text.draw(x+self.pos[0],y+self.pos[1],screen)
+        return (x,self.width+x,y,self.height+y)
+
+
+class Rook:
+    def __init__(self,piece_color):
+        self.piece_color = piece_color
+        self.img = pygame.image.load("./assets/rook_"+self.piece_color+".png")
+    def draw(self,x,y,screen):
+        screen.blit(self.img,(x,y))
+        
+
+class Bishop:
+    def __init__(self,piece_color,x,y):
+        self.piece_color = piece_color
+        self.img = pygame.image.load("./assets/bishop_white.png")
+        self.x = x
+        self.y = y
+    def draw(self,screen):
+        screen.blit(self.img,(self.x,self.y))
+        
