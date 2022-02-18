@@ -38,6 +38,19 @@ themes = {
         "funky"   : [colors['purple'],colors['cyan']]        
         }
 
+# Piece positions
+init_pos_opponent = {
+    "rook1" : (13,13),
+    "rook2" : (363,13),
+    "knight1" : (63,13),
+    "knight2" :(313,13),
+    "bishop1":(113,13),
+    "bishop2":(263,13),
+    "king" : (213,13),
+    "queen" : (163,13),
+    "pawns" :[(13,63),(63,63),(113,63),(163,63),(213,63),(263,63),(313,63),(363,63)]
+}
+
 # ChessBoard Layout class
 class ChessBoard:
     def __init__(self,theme):
@@ -91,11 +104,36 @@ class Rook:
         
 
 class Bishop:
-    def __init__(self,piece_color,x,y):
+    def __init__(self,piece_color):
         self.piece_color = piece_color
-        self.img = pygame.image.load("./assets/bishop_white.png")
-        self.x = x
-        self.y = y
-    def draw(self,screen):
-        screen.blit(self.img,(self.x,self.y))
-        
+        self.img = pygame.image.load("./assets/bishop_"+self.piece_color+".png")
+    def draw(self,x,y,screen):
+        screen.blit(self.img,(x,y))
+
+
+class Knight:
+    def __init__(self,piece_color):
+        self.piece_color = piece_color
+        self.img = pygame.image.load("./assets/horse_"+self.piece_color+".png")
+    def draw(self,x,y,screen):
+        screen.blit(self.img,(x,y))
+
+class King:
+    def __init__(self,piece_color):
+        self.piece_color = piece_color
+        self.img = pygame.image.load("./assets/king_"+self.piece_color+".png")
+    def draw(self,x,y,screen):
+        screen.blit(self.img,(x,y))
+
+class Queen:
+    def __init__(self,piece_color):
+        self.piece_color = piece_color
+        self.img = pygame.image.load("./assets/queen_"+self.piece_color+".png")
+    def draw(self,x,y,screen):
+        screen.blit(self.img,(x,y))
+class Pawn:
+    def __init__(self,piece_color):
+        self.piece_color = piece_color
+        self.img = pygame.image.load("./assets/pawn_"+self.piece_color+".png")
+    def draw(self,x,y,screen):
+        screen.blit(self.img,(x,y))
